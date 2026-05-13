@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                 
-                <div class="mb-10">
+                {{-- <div class="mb-10">
                     <h3 class="text-lg font-bold mb-4">Upload Video Baru</h3>
                     <form action="{{ route('admin.video.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                         @csrf
@@ -25,7 +25,7 @@
                     </form>
                 </div>
 
-                <hr class="mb-10">
+                <hr class="mb-10"> --}}
 
                 <div>
                     <h3 class="text-lg font-bold mb-4">Permintaan Akses Customer</h3>
