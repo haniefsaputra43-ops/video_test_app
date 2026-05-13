@@ -23,7 +23,7 @@ class VideoController extends Controller
         if($permissions && $permissions->status === 'pending') {
             return back()->with('error', 'Permintaan akses untuk video ini sedang diproses!');
         }
-        if ($permissions->expires_at > now()) {
+        if ($permissions && $permissions->status === 'approved' && $permissions->expires_at > now()) {
             return back()->with('success', 'Anda masih memiliki akses untuk video ini!');
         }
         Permission::create([
