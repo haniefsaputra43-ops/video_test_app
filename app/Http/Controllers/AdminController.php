@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     // Menampilkan halaman admin (Daftar video & Request dari customer)
-    public function index() {
+    public function index()
+    {
         $videos = Video::all();
         $requests = Permission::with(['user', 'video'])->where('status', 'pending')->get();
         return view('admin.upload', compact('videos', 'requests'));
     }
 
     // Fungsi Upload Video Asli
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $request->validate([
             'judul' => 'required',
             'video_file' => 'required|mimes:mp4,mov,avi|max:20000', // Maksimal 20MB
@@ -33,20 +35,27 @@ class AdminController extends Controller
     }
 
     // Fungsi Menyetujui Akses dengan Batas Waktu
-  public function approve(Request $request, $id) {
-    // 1. Jalankan Validasi
-    $request->validate([
-        'durasi' => 'required|numeric|min:1', // Wajib diisi, harus angka, minimal 1
-    ]);
+    public function approve(Request $request, $id)
+    {
+        // 1. Jalankan Validasi
+        $request->validate([
+            'durasi' => 'required|numeric|min:1', // Wajib diisi, harus angka, minimal 1
+        ]);
 
-    $p = Permission::find($id);
+        $p = Permission::find($id);
 
-    // 2. Eksekusi Update
-    $p->update([
-        'status' => 'approved',
-        'expires_at' => now()->addHours((int) $request->durasi),
-    ]);
+        // 2. Eksekusi Update
+        $p->update([
+            'status' => 'approved',
+            'expires_at' => now()->addHours((int) $request->durasi),
+        ]);
 
-    return back()->with('success', 'Akses disetujui!');
-}
+        return back()->with('success', 'Akses disetujui!');
+    }
+
+    public function video()
+    {
+        $videos = Video::all();
+        return view('admin.video', compact('videos'));
+    }
 }

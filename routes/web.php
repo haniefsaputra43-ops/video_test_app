@@ -11,7 +11,7 @@ Route::get('/', function () {
 
 // Halaman yang wajib Login
 Route::middleware(['auth', 'verified'])->group(function () {
-    
+
     // Rute Dashboard & Video untuk Customer
     Route::get('/dashboard', [VideoController::class, 'index'])->name('dashboard');
     Route::post('/request-access/{id}', [VideoController::class, 'requestAccess'])->name('request.access');
@@ -21,6 +21,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/upload', [AdminController::class, 'index'])->name('admin.upload');
     Route::post('/admin/upload', [AdminController::class, 'store'])->name('admin.video.store');
     Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('admin.approve');
+    // Rute Khusus Admin (Upload & Approve)
+    Route::get('/admin/video', [AdminController::class, 'video'])->name('admin.video');
 
     // Rute Profile bawaan
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -28,4 +30,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
