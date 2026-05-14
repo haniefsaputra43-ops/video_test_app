@@ -52,43 +52,4 @@ class VideoController extends Controller
         $video = Video::find($id);
         return view('watch', compact('video'));
     }
-
-    // Fungsi tampil form edit video
-    public function editVideo($id)
-    {
-        $video = Video::find($id);
-
-        if (!$video) {
-            return redirect('/dashboard')->with('error', 'Video tidak ditemukan!');
-        }
-
-        return view('edit', compact('video'));
-    }
-
-    // Fungsi update/simpan perubahan video
-    public function updateVideo(Request $request, $id)
-    {
-        $video = Video::find($id);
-
-        if (!$video) {
-            return redirect('/dashboard')->with('error', 'Video tidak ditemukan!');
-        }
-
-        $request->validate([
-            'judul' => 'required',
-            'video_file' => 'nullable|mimes:mp4,mov,avi|max:20000', // Maksimal 20MB
-        ]);
-
-        $video->judul = $request->judul;
-
-        // Jika ada file video baru, update file_path
-        if ($request->hasFile('video_file')) {
-            $path = $request->file('video_file')->store('videos', 'public');
-            $video->file_path = $path;
-        }
-
-        $video->save();
-
-        return back()->with('success', 'Video berhasil diperbarui!');
-    }
 }
