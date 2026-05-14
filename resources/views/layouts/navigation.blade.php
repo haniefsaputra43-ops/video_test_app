@@ -25,6 +25,9 @@
                         <x-nav-link :href="route('admin.video')" :active="request()->routeIs('admin.video')">
                             {{ __('Video') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
+                            {{ __('Video') }}
+                        </x-nav-link>
                     @endif
                 </div>
             </div>

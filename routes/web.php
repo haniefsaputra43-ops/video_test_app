@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,6 +27,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/video/edit/{id}', [AdminController::class, 'editVideo'])->name('admin.video.edit');
     Route::post('/admin/video/update/{id}', [AdminController::class, 'updateVideo'])->name('admin.video.update');
     Route::delete('/admin/video/delete/{id}', [AdminController::class, 'deleteVideo'])->name('admin.video.delete');
+
+    // Rute CRUD Users untuk Admin
+    Route::get('/admin/users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/create', [UserController::class, 'create'])->name('admin.users.create');
+    Route::post('/admin/users', [UserController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/{id}/edit', [UserController::class, 'edit'])->name('admin.users.edit');
+    Route::patch('/admin/users/{id}', [UserController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{id}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 
     // Rute Profile bawaan
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
