@@ -44,10 +44,17 @@
                                 <td class="border p-2 text-center text-sm text-gray-600">
                                     {{ basename($video->file_path) }}
                                 </td>
-                                <td class="border p-2 text-center">
-                                    <a href="{{ route('admin.video.edit', $video->id) }}" class="bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600 transition">
+                                <td class="border p-2 text-center space-x-2">
+                                    <a href="{{ route('admin.video.edit', $video->id) }}" class="bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600 transition inline-block">
                                         Edit
                                     </a>
+                                    <form action="{{ route('admin.video.delete', $video->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Apakah yakin ingin menghapus video ini?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="bg-red-500 text-white px-3 py-1 rounded text-sm hover:bg-red-600 transition">
+                                            Hapus
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                             @empty

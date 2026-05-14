@@ -25,6 +25,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/admin/video', [AdminController::class, 'video'])->name('admin.video');
     Route::get('/admin/video/edit/{id}', [AdminController::class, 'editVideo'])->name('admin.video.edit');
     Route::post('/admin/video/update/{id}', [AdminController::class, 'updateVideo'])->name('admin.video.update');
+    Route::delete('/admin/video/delete/{id}', [AdminController::class, 'deleteVideo'])->name('admin.video.delete');
 
     // Rute Profile bawaan
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

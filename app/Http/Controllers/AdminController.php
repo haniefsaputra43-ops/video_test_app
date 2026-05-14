@@ -97,4 +97,18 @@ class AdminController extends Controller
 
         return redirect()->route('admin.video')->with('success', 'Video berhasil diperbarui!');
     }
+
+    // Fungsi hapus video
+    public function deleteVideo($id)
+    {
+        $video = Video::find($id);
+
+        if (!$video) {
+            return redirect('/admin/video')->with('error', 'Video tidak ditemukan!');
+        }
+
+        $video->delete();
+
+        return redirect()->route('admin.video')->with('success', 'Video berhasil dihapus!');
+    }
 }
