@@ -23,6 +23,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/admin/approve/{id}', [AdminController::class, 'approve'])->name('admin.approve');
     // Rute Khusus Admin (Upload & Approve)
     Route::get('/admin/video', [AdminController::class, 'video'])->name('admin.video');
+    Route::get('/admin/video/edit/{id}', [AdminController::class, 'editVideo'])->name('admin.video.edit');
+    Route::post('/admin/video/update/{id}', [AdminController::class, 'updateVideo'])->name('admin.video.update');
 
     // Rute Profile bawaan
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
