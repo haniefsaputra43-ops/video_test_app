@@ -95,6 +95,6 @@ class AdminController extends Controller
 
         $video->save();
 
-        return back()->with('success', 'Video berhasil diperbarui!');
+        return redirect()->route('admin.video')->with('success', 'Video berhasil diperbarui!');
     }
 }
