@@ -28,7 +28,7 @@
                 <hr class="mb-10">
 
                 <div>
-                    <h3 class="text-lg font-bold mb-4">Permintaan Akses Customer</h3>
+                    <h3 class="text-lg font-bold mb-4">Daftar Video</h3>
                     <table class="w-full border-collapse border border-gray-200">
                         <thead>
                             <tr class="bg-gray-100">
@@ -41,13 +41,18 @@
                             @forelse($videos as $video)
                             <tr>
                                 <td class="border p-2">{{ $video->judul }}</td>
+                                <td class="border p-2 text-center text-sm text-gray-600">
+                                    {{ basename($video->file_path) }}
+                                </td>
                                 <td class="border p-2 text-center">
-                                    {{ asset('storage/' . $video->file_path) }}
+                                    <a href="{{ route('admin.video.edit', $video->id) }}" class="bg-yellow-500 text-white px-3 py-1 rounded text-sm hover:bg-yellow-600 transition">
+                                        Edit
+                                    </a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="4" class="text-center p-4 text-gray-500">Belum ada permintaan akses.</td>
+                                <td colspan="3" class="text-center p-4 text-gray-500">Belum ada video.</td>
                             </tr>
                             @endforelse
                         </tbody>
